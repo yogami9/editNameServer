@@ -7,20 +7,20 @@ CONNECTION_STRING = "mongodb+srv://tarehosty:cheruiyot8711@cluster0.9ezx159.mong
 client = MongoClient(CONNECTION_STRING)
 collection = client["nameapp"]["names"]
 
-@app.route('https://name.motifta.com/')
+@app.route('/')
 def home():
     return send_from_directory('.', 'edit.html')
 
-@app.route('https://name.motifta.com/<path:filename>')
+@app.route('/<path:filename>')
 def files(filename):
     return send_from_directory('.', filename)
 
-@app.route('https://name.motifta.com/api/name', methods=['GET'])
+@app.route('/api/name', methods=['GET'])
 def get_name():
     doc = collection.find_one({"id": "current_name"})
     return jsonify({'name': doc['name'] if doc else ""})
 
-@app.route('https://name.motifta.com/api/name', methods=['POST'])
+@app.route('/api/name', methods=['POST'])
 def save_name():
     name = request.json['name']
     collection.update_one({"id": "current_name"}, {"$set": {"name": name}}, upsert=True)
