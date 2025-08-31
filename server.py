@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -7,13 +8,6 @@ CONNECTION_STRING = "mongodb+srv://tarehosty:cheruiyot8711@cluster0.9ezx159.mong
 client = MongoClient(CONNECTION_STRING)
 collection = client["nameapp"]["names"]
 
-@app.route('')
-def home():
-    return send_from_directory('.', 'edit.html')
-
-@app.route('/<path:filename>')
-def files(filename):
-    return send_from_directory('.', filename)
 
 @app.route('/api/name', methods=['GET'])
 def get_name():
