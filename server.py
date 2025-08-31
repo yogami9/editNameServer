@@ -7,7 +7,7 @@ CONNECTION_STRING = "mongodb+srv://tarehosty:cheruiyot8711@cluster0.9ezx159.mong
 client = MongoClient(CONNECTION_STRING)
 collection = client["nameapp"]["names"]
 
-@app.route('/')
+@app.route('')
 def home():
     return send_from_directory('.', 'edit.html')
 
